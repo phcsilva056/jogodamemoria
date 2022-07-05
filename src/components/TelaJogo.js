@@ -37,8 +37,12 @@ const Box = styled.div`
   background-color: orange;
 `;
 
-const linha = 8;
-const coluna = 8;
+const Botao = styled.button `
+    width: 40vw;
+    height: 40px;
+    margin: 0 auto;
+    background-color: #146b2b;
+  `
 
 export default class TelaJogo extends Component {
     state = {
@@ -54,7 +58,7 @@ export default class TelaJogo extends Component {
 
       start = () => {
         let array = [];
-        array.length = linha * coluna;
+        array.length = this.props.tamanhoJogo * this.props.tamanhoJogo;
         for (let i = 0; i < array.length; i++) {
           if (i % 2 === 0) {
             array[i] = {
@@ -151,9 +155,10 @@ export default class TelaJogo extends Component {
   render() {
     return (
         <>
+        <button onClick={()=>this.props.trocaTela('home')}>Voltar a Home</button>
         <h1>Jorginho da memória</h1>
-    <button onClick={this.comeca}>Começar</button>
-        <Container linha={this.props.numeroDeLinhas} coluna={this.props.numeroDeColunas}>
+        <Botao onClick={this.comeca}>Começar</Botao>
+        <Container linha={this.props.tamanhoJogo} coluna={this.props.tamanhoJogo}>
         {this.state.arrayBox.map((item) => {
           if (item.clicou === true) {
             return (
